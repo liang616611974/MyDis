@@ -1,10 +1,8 @@
 package com.sdp.framework.base;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import com.lf.exception.DaoException;
+import com.sdp.framework.page.Page;
+import com.sdp.framework.page.PageRequest;
 
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.ibatis.session.RowBounds;
@@ -16,9 +14,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.support.DaoSupport;
 import org.springframework.util.Assert;
 
-import com.lf.exception.DaoException;
-import com.sdp.framework.page.Page;
-import com.sdp.framework.page.PageRequest;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
 * @Title: BaseMyBatisDao.java
@@ -27,7 +27,6 @@ import com.sdp.framework.page.PageRequest;
 * @date 2016-10-13
 * @version 1.0
  */
-@SuppressWarnings("unchecked")
 public abstract class BaseMyBatisDaoImpl<E extends Serializable,Q extends PageRequest,PK extends Serializable> extends DaoSupport implements BaseDao<E,Q,PK> {
     private static final Logger logger = LoggerFactory.getLogger(BaseMyBatisDaoImpl.class);
     private static final String SQL_GET_SUFFIX = ".get";
@@ -66,54 +65,48 @@ public abstract class BaseMyBatisDaoImpl<E extends Serializable,Q extends PageRe
     	return sqlSessionTemplate;
     }
 	
-	@Override
 	protected void checkDaoConfig() throws IllegalArgumentException {
 		Assert.notNull(sqlSessionFactory,"sqlSessionFactory must be not null");
 	}
-    
-	@Override
+
 	public int insert(E entity) {
 		int affectCount = getSqlSessionTemplate().insert(getInsertStatement(), entity);
 		return affectCount;
 	}
-	
-	@Override
+
 	public int update(E entity) {
 		int affectCount = getSqlSessionTemplate().update(getUpdateStatement(), entity);
 		return affectCount;
 	}
-	
-	@Override
+
 	public int delete(PK id) {
 		int affectCount = getSqlSessionTemplate().delete(getDeleteStatement(), id);
 		return affectCount;
 	}
 	
-    @Override
 	public E get(PK id) {
         E e = getSqlSessionTemplate().selectOne(getFindByPrimaryKeyStatement(), id);
         return e;
     }
 
-    @Override
     public List<E> query(){
     	List<E> list = getSqlSessionTemplate().selectList(getFindAllStatement());
     	return list;
     }
     
-    @Override
+
     public List<E> query(Q query) {
     	List<E> list =  getSqlSessionTemplate().selectList(getFindAllByQueryStatement(),query);
     	return list;
     };
     
-    @Override
+
     public Page<E> queryPage(Q query) {
     	return pageQuery(getFindAllStatement(),query);
     	
     };
     
-    @Override
+
     public long count(Q query){
     	return sqlSessionTemplate.selectOne(getCountStatementForPaging(getFindAllStatement()),query);
     }

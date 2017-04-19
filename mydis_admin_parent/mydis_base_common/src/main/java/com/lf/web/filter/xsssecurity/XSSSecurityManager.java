@@ -3,12 +3,12 @@ package com.lf.web.filter.xsssecurity;
 import java.util.Iterator;
 import java.util.regex.Pattern;
 
+import org.apache.commons.lang3.StringUtils;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.lf.helper.StringHelper;
 
 /**
 * <p>Title: XSSSecurityManager.java<／p>
@@ -45,19 +45,19 @@ public class XSSSecurityManager {
 		String isLog = getEleValue(superElement, "isLog");
 		String isChain = getEleValue(superElement, "isChain");
 		String isReplace = getEleValue(superElement, "isReplace");
-		if(StringHelper.isNotBlank(isCheckHeader)){
+		if(StringUtils.isNotBlank(isCheckHeader)){
 			XSSSecurityConfig.IS_CHECK_HEADER = new Boolean(isCheckHeader);
 		}
-		if(StringHelper.isNotBlank(isCheckHeader)){
+		if(StringUtils.isNotBlank(isCheckHeader)){
 			XSSSecurityConfig.IS_CHECK_PARAMETER = new Boolean(isCheckParameter);
 		}
-		if(StringHelper.isNotBlank(isLog)){
+		if(StringUtils.isNotBlank(isLog)){
 			XSSSecurityConfig.IS_LOG = new Boolean(isLog);
 		}
-		if(StringHelper.isNotBlank(isChain)){
+		if(StringUtils.isNotBlank(isChain)){
 			XSSSecurityConfig.IS_CHAIN = new Boolean(isChain);
 		}
-		if(StringHelper.isNotBlank(isReplace)){
+		if(StringUtils.isNotBlank(isReplace)){
 			XSSSecurityConfig.IS_REPLACE = new Boolean(isReplace);
 		}
 		//3.加载regex表达式集合
@@ -93,7 +93,7 @@ public class XSSSecurityManager {
      * @return
      */
     public static String securityReplace(String text){
-    	if(StringHelper.isBlank(text)){
+    	if(StringUtils.isBlank(text)){
     		return text;
     	}
     	return text.replaceAll(XSS_REGEX, "");
@@ -105,7 +105,7 @@ public class XSSSecurityManager {
      * @return
      */
     public static boolean matches(String text){
-    	if(StringHelper.isBlank(text)){
+    	if(StringUtils.isBlank(text)){
     		return false;
     	}
     	//过滤控制字符
@@ -128,7 +128,7 @@ public class XSSSecurityManager {
      */
     private static String getEleValue(Element element, String tagName){
     	String tagVal = element.elementText(tagName);
-    	if(StringHelper.isBlank(tagVal)){
+    	if(StringUtils.isBlank(tagVal)){
     		logger.info("安全过滤配置文件中没有设置“{}”属性",tagName);
     		return null;
     	}

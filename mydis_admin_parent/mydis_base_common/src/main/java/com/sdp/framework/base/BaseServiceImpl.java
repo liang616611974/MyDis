@@ -28,7 +28,6 @@ public abstract class BaseServiceImpl<E extends Serializable,Q extends PageReque
 	protected abstract BaseDao getBaseDao();
 
 	@Transactional(propagation = Propagation.REQUIRED)
-	@Override
 	public void save(E entity) {
 		try {
 			getBaseDao().insert(entity);
@@ -39,7 +38,6 @@ public abstract class BaseServiceImpl<E extends Serializable,Q extends PageReque
 	}
 
 	@Transactional(propagation = Propagation.REQUIRED)
-	@Override
 	public void modify(E entity) {
 		try {
 			getBaseDao().update(entity);
@@ -50,7 +48,6 @@ public abstract class BaseServiceImpl<E extends Serializable,Q extends PageReque
 	}
 
 	@Transactional(propagation = Propagation.REQUIRED)
-	@Override
 	public void remove(PK id) {
 		try {
 			getBaseDao().delete(id);
@@ -60,7 +57,6 @@ public abstract class BaseServiceImpl<E extends Serializable,Q extends PageReque
 		}
 	}
 	
-	@Override
 	public E get(PK id) {
 		try {
 			return (E) getBaseDao().get(id);
@@ -70,7 +66,6 @@ public abstract class BaseServiceImpl<E extends Serializable,Q extends PageReque
 		}
 	}
 
-	@Override
 	public List<E> query() {
 		try {
 			return getBaseDao().query();
@@ -80,7 +75,6 @@ public abstract class BaseServiceImpl<E extends Serializable,Q extends PageReque
 		}
 	}
 	
-	@Override
 	public List<E> query(Q query){
 		try{
 			return getBaseDao().query(query);
@@ -90,7 +84,6 @@ public abstract class BaseServiceImpl<E extends Serializable,Q extends PageReque
 		}
 	}
 	
-	@Override
 	public Page<E> queryPage(Q query) {
 		try{
 			return getBaseDao().queryPage(query);
@@ -100,7 +93,6 @@ public abstract class BaseServiceImpl<E extends Serializable,Q extends PageReque
 		}
 	}
 	
-	@Override
 	public long count(Q query){
 		try{
 			return getBaseDao().count(query);
