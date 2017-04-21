@@ -44,6 +44,9 @@
         <commons-lang3.version>3.1</commons-lang3.version>
         <commons-codec.version>1.10</commons-codec.version>
         <commons-beanutils-core.version>1.8.3</commons-beanutils-core.version>
+        <commons-collections4.version>4.1</commons-collections4.version>
+        <!-- others -->
+        <snowdrop-vfs.version>4.0.0.Final</snowdrop-vfs.version>
     </properties>
 
     <!-- 依赖的jar包版本管理 -->
@@ -125,6 +128,18 @@
                 <artifactId>commons-beanutils-core</artifactId>
                 <version>${commons-beanutils-core.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-collections4</artifactId>
+                <version>${commons-collections4.version}</version>
+            </dependency>
+
+            <!-- others -->
+            <dependency>
+                <groupId>org.jboss.snowdrop</groupId>
+                <artifactId>snowdrop-vfs</artifactId>
+                <version>${snowdrop-vfs.version}</version>
+            </dependency>
 
         </dependencies>
     </dependencyManagement>
@@ -187,6 +202,16 @@
         <dependency>
             <groupId>commons-beanutils</groupId>
             <artifactId>commons-beanutils-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-collections4</artifactId>
+        </dependency>
+
+        <!-- others -->
+        <dependency>
+            <groupId>org.jboss.snowdrop</groupId>
+            <artifactId>snowdrop-vfs</artifactId>
         </dependency>
 
     </dependencies>

@@ -2,6 +2,7 @@ package com.lf.helper;
 
 import java.io.File;
 
+import org.apache.commons.lang3.StringUtils;
 import org.jboss.spring.vfs.VFSResourceLoader;
 import org.springframework.util.ResourceUtils;
 
@@ -10,6 +11,7 @@ import org.springframework.util.ResourceUtils;
 * <p>Description: 文件操作帮助类<／p>
 * @author Liangfeng
 * @date 2017-2-10
+ *
 * @version 1.0
  */
 public class FileHelper {
@@ -29,7 +31,7 @@ public class FileHelper {
 		File file = null;
 		try{
 			//2.如果filePath不存在，则返回null
-			if(StringHelper.isBlank(filePath)){
+			if(StringUtils.isBlank(filePath)){
 				return null;
 			}
 			//3.Spring框架提供的获取资源的API,支持classpath:表达式。

@@ -13,6 +13,8 @@ import java.util.Map;
 import javax.net.ssl.SSLContext;
 
 import org.apache.commons.collections.MapUtils;
+import org.apache.commons.collections4.MapUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.config.AuthSchemes;
@@ -61,7 +63,7 @@ public class HttpClientHelper {
 		String result = null;
 		try {
 			//1.校验参数
-			if (StringHelper.isBlank(url)) {
+			if (StringUtils.isBlank(url)) {
 				throw new Exception("请求参数url不能为空!");
 			}
 			if (MapUtils.isEmpty(param)) {
@@ -93,7 +95,7 @@ public class HttpClientHelper {
 		String result = null;
 		try {
 			//1.校验参数
-			if (StringHelper.isBlank(url)) {
+			if (StringUtils.isBlank(url)) {
 				throw new Exception("请求参数url不能为空!");
 			}
 			if (file==null) {
