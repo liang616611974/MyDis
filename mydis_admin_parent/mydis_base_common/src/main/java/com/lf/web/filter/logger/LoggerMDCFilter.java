@@ -10,7 +10,6 @@ import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.lf.helper.StringHelper;
 import com.lf.helper.UUIDHelper;
 
 /**
@@ -36,10 +35,10 @@ public class LoggerMDCFilter extends OncePerRequestFilter {
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain){
 		try{
 			//1.加入当前登陆用户id
-			String userId = USER_ID_KEY + PREFIX + StringHelper.defaultString(String.valueOf(request.getSession().getAttribute(USER_ID_KEY_SESSION))) + SUFFIX;
+			String userId = USER_ID_KEY + PREFIX + StringUtils.defaultString(String.valueOf(request.getSession().getAttribute(USER_ID_KEY_SESSION))) + SUFFIX;
 			MDC.put(USER_ID_KEY, userId);
 			//2.加入请求URI
-			String requestURI = REQUEST_URI_KEY + PREFIX +StringHelper.defaultString(request.getRequestURI()) + (request.getQueryString() == null ? "" : "?"+request.getQueryString()) + SUFFIX;
+			String requestURI = REQUEST_URI_KEY + PREFIX +StringUtils.defaultString(request.getRequestURI()) + (request.getQueryString() == null ? "" : "?"+request.getQueryString()) + SUFFIX;
 			MDC.put(REQUEST_URI_KEY,requestURI);
 			//3.加入远程访问地址
 			String remoteAddr = REMOTE_ADDR_KEY + PREFIX + StringUtils.defaultString(request.getRemoteAddr()) + SUFFIX;

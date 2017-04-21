@@ -1,22 +1,20 @@
 package com.lf.web.mvc.interceptor.token;
 
-import java.lang.reflect.Method;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
+import com.lf.constant.WebConstant;
+import com.lf.helper.SystemConfigHelper;
+import com.lf.helper.UUIDHelper;
+import com.lf.web.mvc.interceptor.token.annotation.Token;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import com.lf.constant.WebConstant;
-import com.lf.helper.StringHelper;
-import com.lf.helper.SystemConfigHelper;
-import com.lf.helper.UUIDHelper;
-import com.lf.web.mvc.interceptor.token.annotation.Token;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.lang.reflect.Method;
 
 /**
 * <p>Title: TokenInterceptor.java<／p>
@@ -106,9 +104,9 @@ public class TokenInterceptor extends HandlerInterceptorAdapter{
         if (annotation.save()) {
             logger.info("sessionTokenKeyReqUri=========={}",reqUri);
             //去掉项目名称
-            reqUri = StringHelper.replace(reqUri, request.getContextPath(), "");
+            reqUri = StringUtils.replace(reqUri, request.getContextPath(), "");
             //替换"/"为"_"
-            reqUri = StringHelper.replace(reqUri, "/", "_");
+            reqUri = StringUtils.replace(reqUri, "/", "_");
             key.append(reqUri);
             logger.info("sessionTokenKeySave========={}", key.toString());
             return key.toString();
@@ -119,13 +117,13 @@ public class TokenInterceptor extends HandlerInterceptorAdapter{
         String referer = request.getHeader(WebConstant.REFERER_REQUEST_HEADER);
         logger.info("sessionTokenKeyReferer================{}",referer);
         //2.1如果refer为空者返回key
-        if(StringHelper.isBlank(referer)){
+        if(StringUtils.isBlank(referer)){
         	return key.toString();
         }
         //2.2如果不为空
-        String refererUri = StringHelper.replace(referer, serverPrefix, "");
-        refererUri = StringHelper.replace(refererUri, "/", "_");
-        refererUri = StringHelper.substringBefore(refererUri, "?");
+        String refererUri = StringUtils.replace(referer, serverPrefix, "");
+        refererUri = StringUtils.replace(refererUri, "/", "_");
+        refererUri = StringUtils.substringBefore(refererUri, "?");
         key.append(refererUri);
         logger.info("sessionTokenKeyValid========={}",key.toString());
         return key.toString();
@@ -144,7 +142,7 @@ public class TokenInterceptor extends HandlerInterceptorAdapter{
 		Object serverToken = session.getAttribute(sessionTokenKey);//session的token
 		String clientToken = request.getParameter(TOKEN_KEY);//客户端的token
 		session.removeAttribute(sessionTokenKey);//校验完作废session的token
-		if(StringHelper.equals(String.valueOf(serverToken), clientToken)){
+		if(StringUtils.equals(String.valueOf(serverToken), clientToken)){
 			isRepeatSubmit = false;
 		}
 		return isRepeatSubmit;

@@ -5,7 +5,7 @@
     <!--声明项目描述符遵循哪一个POM模型版本。模型本身的版本很少改变，虽然如此，但它仍然是必不可少的，这是为了当Maven引入了新的特性或者其他模型变更的时候，确保稳定性。 -->
     <modelVersion>4.0.0</modelVersion>
 
-    <!-- 本工程配置 -->
+    <!-- 1.本工程配置 -->
     <!--项目的全球唯一标识符，通常使用全限定的包名区分该项目和其他项目。并且构建时生成的路径也是由此生成， 如com.mycompany.app生成的相对路径为：/com/mycompany/app -->
     <groupId>com.lf.mydis</groupId>
     <!-- 构件的标识符，它和group ID一起唯一标识一个构件。换句话说，你不能有两个不同的项目拥有同样的artifact ID和groupID -->
@@ -15,7 +15,7 @@
     <!--项目产生的构件类型，例如jar、war、ear、pom。 -->
     <packaging>pom</packaging>
 
-    <!-- 工程模块管理 -->
+    <!-- 2.工程模块管理 -->
     <modules>
         <module>mydis_base_common</module>
         <module>mydis_module_bean</module>
@@ -25,34 +25,51 @@
     </modules>
 
 
-    <!-- 依赖的jar包版本配置 -->
+    <!-- 3.依赖的jar包版本配置 -->
     <properties>
-        <!-- web容器提供 -->
+        <!-- Web 容器提供 -->
         <servlet_2.4_spec.version>1.1.1</servlet_2.4_spec.version>
         <jsp_2.0_spec.version>1.1</jsp_2.0_spec.version>
-        <!-- 测试 -->
+        <!-- Test 测试 -->
         <junit.version>4.12</junit.version>
-        <!-- Spring -->
+        <!-- Spring 集成框架 -->
         <spring.version>4.3.7.RELEASE</spring.version>
-        <!-- log日志 -->
+        <!-- Log 日志 -->
         <slf4j.version>1.7.24</slf4j.version>
         <logback.version>1.1.11</logback.version>
-        <!-- mybatis -->
+        <!-- Mybatis ORM框架 -->
         <mybatis.version>3.2.8</mybatis.version>
         <mybatis-spring.version>1.2.0</mybatis-spring.version>
-        <!-- commons管理 -->
-        <commons-lang3.version>3.1</commons-lang3.version>
-        <commons-codec.version>1.10</commons-codec.version>
+        <!-- MySql 数据库 -->
+        <mysql.version>6.0.6</mysql.version>
+        <!-- Validation 验证 -->
+        <validation-api.version>1.1.0.Final</validation-api.version>
+        <!-- Jackson json框架-->
+        <jackson.version>2.9.0.pr2</jackson.version>
+        <!-- Freemarker 模版引擎 -->
+        <freemarker.version>2.3.23</freemarker.version>
+        <!-- Commons 工具 -->
         <commons-beanutils-core.version>1.8.3</commons-beanutils-core.version>
+        <commons-codec.version>1.10</commons-codec.version>
         <commons-collections4.version>4.1</commons-collections4.version>
-        <!-- others -->
+        <commons-dbcp2.version>2.1.1</commons-dbcp2.version>
+        <commons-io.version>2.5</commons-io.version>
+        <commons-lang3.version>3.1</commons-lang3.version>
+        <commons-logging.version>1.2</commons-logging.version>
+        <!-- HttpClient 模拟Http请求工具 -->
+        <httpclient.version>4.5.3</httpclient.version>
+        <httpcore.version>4.4.6</httpcore.version>
+        <!-- Others 其他 包括jboss-->
+        <aopalliance.version>1.0</aopalliance.version>
+        <backport-util-concurrent.version>3.1</backport-util-concurrent.version>
+        <dom4j.version>1.6.1</dom4j.version>
         <snowdrop-vfs.version>4.0.0.Final</snowdrop-vfs.version>
     </properties>
 
-    <!-- 依赖的jar包版本管理 -->
+    <!-- 4.依赖的jar包版本管理 -->
     <dependencyManagement>
         <dependencies>
-            <!-- web容器提供 -->
+            <!-- Web 容器提供 -->
             <dependency>
                 <groupId>org.apache.geronimo.specs</groupId>
                 <artifactId>geronimo-servlet_2.4_spec</artifactId>
@@ -63,13 +80,13 @@
                 <artifactId>geronimo-jsp_2.0_spec</artifactId>
                 <version>${jsp_2.0_spec.version}</version>
             </dependency>
-            <!-- 测试 -->
+            <!-- Test 测试 -->
             <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
                 <version>${junit.version}</version>
             </dependency>
-            <!-- Spring -->
+            <!-- Spring 集成框架 -->
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-context</artifactId>
@@ -85,7 +102,17 @@
                 <artifactId>spring-tx</artifactId>
                 <version>${spring.version}</version>
             </dependency>
-            <!-- log日志 -->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-test</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-web</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <!-- Log 日志 -->
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-api</artifactId>
@@ -101,7 +128,7 @@
                 <artifactId>logback-core</artifactId>
                 <version>${logback.version}</version>
             </dependency>
-            <!-- mybatis -->
+            <!-- Mybatis ORM框架 -->
             <dependency>
                 <groupId>org.mybatis</groupId>
                 <artifactId>mybatis</artifactId>
@@ -112,11 +139,45 @@
                 <artifactId>mybatis-spring</artifactId>
                 <version>${mybatis-spring.version}</version>
             </dependency>
-            <!-- commons管理 -->
+            <!-- MySql 数据库 -->
             <dependency>
-                <groupId>org.apache.commons</groupId>
-                <artifactId>commons-lang3</artifactId>
-                <version>${commons-lang3.version}</version>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql.version}</version>
+            </dependency>
+            <!-- Validation 验证 -->
+            <dependency>
+                <groupId>javax.validation</groupId>
+                <artifactId>validation-api</artifactId>
+                <version>${validation-api.version}</version>
+            </dependency>
+            <!-- Jackson json框架-->
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-core</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-annotations</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+            <!-- Freemarker 模版引擎 -->
+            <dependency>
+                <groupId>org.freemarker</groupId>
+                <artifactId>freemarker</artifactId>
+                <version>${freemarker.version}</version>
+            </dependency>
+            <!-- Commons管理 -->
+            <dependency>
+                <groupId>commons-beanutils</groupId>
+                <artifactId>commons-beanutils-core</artifactId>
+                <version>${commons-beanutils-core.version}</version>
             </dependency>
             <dependency>
                 <groupId>commons-codec</groupId>
@@ -124,30 +185,97 @@
                 <version>${commons-codec.version}</version>
             </dependency>
             <dependency>
-                <groupId>commons-beanutils</groupId>
-                <artifactId>commons-beanutils-core</artifactId>
-                <version>${commons-beanutils-core.version}</version>
-            </dependency>
-            <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-collections4</artifactId>
                 <version>${commons-collections4.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-dbcp2</artifactId>
+                <version>${commons-dbcp2.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>${commons-io.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commons-lang3.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-logging</groupId>
+                <artifactId>commons-logging</artifactId>
+                <version>${commons-logging.version}</version>
+            </dependency>
+            <!-- HttpClient 模拟http请求工具 -->
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpclient</artifactId>
+                <version>${httpclient.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpmime</artifactId>
+                <version>${httpclient.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpcore</artifactId>
+                <version>${httpcore.version}</version>
+            </dependency>
 
-            <!-- others -->
+            <!-- Others -->
+            <dependency>
+                <groupId>aopalliance</groupId>
+                <artifactId>aopalliance</artifactId>
+                <version>${aopalliance.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>backport-util-concurrent</groupId>
+                <artifactId>backport-util-concurrent</artifactId>
+                <version>${backport-util-concurrent.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>dom4j</groupId>
+                <artifactId>dom4j</artifactId>
+                <version>${dom4j.version}</version>
+            </dependency>
             <dependency>
                 <groupId>org.jboss.snowdrop</groupId>
                 <artifactId>snowdrop-vfs</artifactId>
                 <version>${snowdrop-vfs.version}</version>
             </dependency>
 
+
         </dependencies>
     </dependencyManagement>
 
-    <!-- 引入各个模块公用的依赖jar包 -->
+    <!-- 5.引入各个模块公用的依赖jar包 -->
     <dependencies>
 
-        <!-- Spring -->
+        <!-- Web 容器提供 -->
+        <dependency>
+            <groupId>org.apache.geronimo.specs</groupId>
+            <artifactId>geronimo-servlet_2.4_spec</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.geronimo.specs</groupId>
+            <artifactId>geronimo-jsp_2.0_spec</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Test 测试 -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Spring 集成框架-->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
@@ -165,8 +293,16 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-tx</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+        </dependency>
 
-        <!-- log日志 -->
+        <!-- Log 日志 -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
@@ -180,7 +316,7 @@
             <artifactId>logback-core</artifactId>
         </dependency>
 
-        <!-- mybatis -->
+        <!-- Mybatis ORM框架-->
         <dependency>
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis</artifactId>
@@ -190,25 +326,96 @@
             <artifactId>mybatis-spring</artifactId>
         </dependency>
 
-        <!-- Commons管理 -->
+        <!-- MySql 数据库 -->
         <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+
+        <!-- validation 验证 -->
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+        </dependency>
+
+        <!-- Jackson json框架-->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+        </dependency>
+
+        <!-- Freemarker 模版引擎 -->
+        <dependency>
+            <groupId>org.freemarker</groupId>
+            <artifactId>freemarker</artifactId>
+        </dependency>
+
+        <!-- Commons 工具 -->
+        <dependency>
+            <groupId>commons-beanutils</groupId>
+            <artifactId>commons-beanutils-core</artifactId>
         </dependency>
         <dependency>
             <groupId>commons-codec</groupId>
             <artifactId>commons-codec</artifactId>
         </dependency>
         <dependency>
-            <groupId>commons-beanutils</groupId>
-            <artifactId>commons-beanutils-core</artifactId>
-        </dependency>
-        <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-collections4</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-dbcp2</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+        </dependency>
 
-        <!-- others -->
+        <!-- HttpClient 模拟http请求工具 -->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpmime</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpcore</artifactId>
+        </dependency>
+
+
+        <!-- Others 其它 -->
+        <dependency>
+            <groupId>aopalliance</groupId>
+            <artifactId>aopalliance</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>backport-util-concurrent</groupId>
+            <artifactId>backport-util-concurrent</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>dom4j</groupId>
+            <artifactId>dom4j</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.jboss.snowdrop</groupId>
             <artifactId>snowdrop-vfs</artifactId>
