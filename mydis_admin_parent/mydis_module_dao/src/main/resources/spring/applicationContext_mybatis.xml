@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+
+	<!-- 创建sqlSessionFactory -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="configLocation" value="classpath:/mybatis/mybatis_config.xml" />  
+        <property name="dataSource" ref="dataSource_web"/>
+        <property name="plugins">
+        	<list>
+				<bean class="com.sdp.framework.mybatis.plugin.OffsetLimitInterceptor">
+       				<property name="properties">
+       					<props>
+		        			<prop key="dialectClass">com.sdp.framework.jdbc.dialect.MySQLDialect</prop>
+		        		</props>
+					</property>
+				</bean>
+        	</list>
+        </property>
+        <property name="mapperLocations">
+        	<list>
+				<value>classpath:/com/**/*Mapper.xml</value>
+        	</list>
+        </property>
+    </bean>
+
+	<!-- 创建sqlSessionTemplate -->
+	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg index="0" ref="sqlSessionFactory" />
+	</bean>
+
+    
+</beans>

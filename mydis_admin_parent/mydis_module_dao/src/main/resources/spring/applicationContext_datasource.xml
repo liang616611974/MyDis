@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:aop="http://www.springframework.org/schema/aop"
+	   xmlns:tx="http://www.springframework.org/schema/tx"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+	
+	   
+	<!-- 数据源定义 -->
+	<bean id="dataSource_web" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="${web.jdbc.driver}"/>
+		<property name="url" value="${web.jdbc.url}"/>
+		<property name="username" value="${web.jdbc.username}"/>
+		<property name="password" value="${web.jdbc.password}"/>
+		<property name="minEvictableIdleTimeMillis" value="5"/>
+		<property name="testOnBorrow" value="true"/>
+		<property name="initialSize" value="3"/>
+		<property name="testWhileIdle" value="true"/>
+		<property name="testOnReturn" value="true"/>
+		<property name="removeAbandoned" value="true"/>
+		<property name="removeAbandonedTimeout" value="300"/>
+		<property name="logAbandoned" value="true"/>
+		<property name="poolPreparedStatements" value="true"/>
+		<property name="maxOpenPreparedStatements" value="10"/>
+		<property name="minIdle" value="10"/>  
+		<property name="maxActive" value="100"/>  
+		<property name="maxWait" value="10000"/> 
+	</bean>
+	
+	
+	<!-- 事务管理器 -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource_web"/>
+        <property name="defaultTimeout" value="60" />
+    </bean>
+	
+	<!-- 开启注解事务控制，以 @Transactional 标注来定义事务 -->
+	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
+	
+	
+	<!-- log4jdbc可以将数据源执行的sql将占位符?替换成字符,并以日志打印出来. log4j配置: log4j.logger.jdbc.sqltiming=INFO  
+	如oracle示例: 
+		原来的sql: select * from user where birth_date = ? and username = ? and age > ?
+		转换后sql: select * from user where birth_date = to_date('2010-08-13','yyyy-mm-dd') and username = 'badqiu' and age > 20
+	 -->
+	<bean id="log4jdbcInterceptor" class="net.sf.log4jdbc.DataSourceSpyInterceptor" />
+    <bean id="dataSourceLog4jdbcAutoProxyCreator" class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+       <property name="interceptorNames">
+           <list>
+              <value>log4jdbcInterceptor</value>        
+           </list>
+       </property>
+       <property name="beanNames">
+           <list>
+              <value>dataSource_web</value>
+           </list>
+       </property>
+    </bean>
+ 	 
+</beans>

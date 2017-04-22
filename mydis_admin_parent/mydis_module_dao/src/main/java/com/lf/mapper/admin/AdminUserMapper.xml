@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper   
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+
+<!-- 不使用namespace的话sql搜索定位会比较方便 -->
+<mapper namespace="AdminUser">
+
+	<!-- 类映射 -->
+	<resultMap id="RM_AdminUser" type="adminUser">
+		<result property="id" column="id" />
+		<result property="username" column="username" />
+		<result property="password" column="password" />
+		<result property="status" column="status" />
+		<result property="idcard" column="idcard" />
+		<result property="mobile" column="mobile" />
+		<result property="email" column="email" />
+		<result property="createUser" column="create_user" />
+		<result property="createTime" column="create_time" />
+		<result property="modifyUser" column="modify_user" />
+		<result property="modifyTime" column="modify_time" />
+	</resultMap>
+
+	<!-- 用于select查询公用的列 -->
+	<sql id="AdminUser.columns">
+	    <![CDATA[
+		id,username,password,status,idcard,mobile,email,create_user,create_time,modify_user,modify_time
+	    ]]>
+	</sql>
+
+	<!-- 用于select查询公用的条件  -->
+	<sql id="AdminUser.where">
+		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>
+			<if test="@Ognl@isNotEmpty(id)">
+				AND id = #{id}
+			</if>
+			<if test="@Ognl@isNotEmpty(username)">
+				AND username = #{username}
+			</if>
+			<if test="@Ognl@isNotEmpty(password)">
+				AND password = #{password}
+			</if>
+			<if test="@Ognl@isNotEmpty(status)">
+				AND status = #{status}
+			</if>
+			<if test="@Ognl@isNotEmpty(idcard)">
+				AND idcard = #{idcard}
+			</if>
+			<if test="@Ognl@isNotEmpty(mobile)">
+				AND mobile = #{mobile}
+			</if>
+			<if test="@Ognl@isNotEmpty(email)">
+				AND email = #{email}
+			</if>
+			<if test="@Ognl@isNotEmpty(createUser)">
+				AND create_user = #{createUser}
+			</if>
+			<if test="createTimeBegin != null">
+				AND create_time >= #{createTimeBegin}
+			</if>
+			<if test="createTimeEnd != null">
+				AND create_time &lt;= #{createTimeEnd}
+			</if>
+			<if test="@Ognl@isNotEmpty(modifyUser)">
+				AND modify_user = #{modifyUser}
+			</if>
+			<if test="modifyTimeBegin != null">
+				AND modify_time >= #{modifyTimeBegin}
+			</if>
+			<if test="modifyTimeEnd != null">
+				AND modify_time &lt;= #{modifyTimeEnd}
+			</if>
+		</where>
+	</sql>
+	
+	<!-- 插入sql -->
+	<insert id="AdminUser.insert" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO a_admin_user
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			id,
+			<if test="username != null">
+				username,
+			</if>
+			<if test="password != null">
+				password,
+			</if>
+			<if test="status != null">
+				status,
+			</if>
+			<if test="idcard != null">
+				idcard,
+			</if>
+			<if test="mobile != null">
+				mobile,
+			</if>
+			<if test="email != null">
+				email,
+			</if>
+			<if test="createUser != null">
+				create_user,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+			<if test="modifyUser != null">
+				modify_user,
+			</if>
+			<if test="modifyTime != null">
+				modify_time,
+			</if>
+		</trim>
+
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			#{id},
+			<if test="username != null">
+				#{username},
+			</if>
+			<if test="password != null">
+				#{password},
+			</if>
+			<if test="status != null">
+				#{status},
+			</if>
+			<if test="idcard != null">
+				#{idcard},
+			</if>
+			<if test="mobile != null">
+				#{mobile},
+			</if>
+			<if test="email != null">
+				#{email},
+			</if>
+			<if test="createUser != null">
+				#{createUser},
+			</if>
+			<if test="createTime != null">
+				#{createTime},
+			</if>
+			<if test="modifyUser != null">
+				#{modifyUser},
+			</if>
+			<if test="modifyTime != null">
+				#{modifyTime},
+			</if>
+		</trim>
+	</insert>
+
+	<!-- 修改sql -->
+	<update id="AdminUser.update">
+		UPDATE a_admin_user
+		<set>
+			<if test="username != null">
+				username = #{username} ,
+			</if>
+			<if test="password != null">
+				password = #{password} ,
+			</if>
+			<if test="status != null">
+				status = #{status} ,
+			</if>
+			<if test="idcard != null">
+				idcard = #{idcard} ,
+			</if>
+			<if test="mobile != null">
+				mobile = #{mobile} ,
+			</if>
+			<if test="email != null">
+				email = #{email} ,
+			</if>
+			<if test="createUser != null">
+				create_user = #{createUser} ,
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime} ,
+			</if>
+			<if test="modifyUser != null">
+				modify_user = #{modifyUser} ,
+			</if>
+			<if test="modifyTime != null">
+				modify_time = #{modifyTime} 
+			</if>
+		</set>
+		WHERE
+		id = #{id} 
+	</update>
+
+	<!-- 删除sql -->
+	<delete id="AdminUser.delete">
+	    <![CDATA[
+	        DELETE FROM a_admin_user WHERE
+	        id = #{id} 
+	    ]]>
+	</delete>
+
+	<!-- 根据id主键获取sql -->
+	<select id="AdminUser.get" resultMap="RM_AdminUser">
+		SELECT
+		<include refid="AdminUser.columns" />
+	    <![CDATA[
+		    FROM a_admin_user 
+	        WHERE 
+		        id = #{id} 
+	    ]]>
+	</select>
+
+	<!-- 分页查询统计sql -->
+	<select id="AdminUser.query.count" resultType="Integer">
+		SELECT count(*) FROM a_admin_user
+		<include refid="AdminUser.where" />
+	</select>
+	
+	<!-- 分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页 因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现 -->
+	<!-- 分页查询sql -->
+	<select id="AdminUser.query" resultMap="RM_AdminUser">
+		SELECT
+		<include refid="AdminUser.columns" />
+		FROM a_admin_user
+		<include refid="AdminUser.where" />
+		<if test="sortColumns != null">
+			ORDER BY ${sortColumns}
+		</if>
+	</select>
+	
+	<!-- 根据条件查询sql -->
+	<select id="AdminUser.queryByVO" parameterType="adminUserQuery" resultMap="RM_AdminUser">
+		SELECT
+		<include refid="AdminUser.columns" />
+		FROM a_admin_user
+		<include refid="AdminUser.where" />
+		<if test="sortColumns != null">
+			ORDER BY ${sortColumns}
+		</if>
+	</select>
+
+</mapper>
