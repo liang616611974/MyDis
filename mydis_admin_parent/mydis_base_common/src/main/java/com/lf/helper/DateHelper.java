@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateFormatUtils;
 
 /**
@@ -43,7 +44,7 @@ public class DateHelper {
 	 * @return
 	 */
 	public static String format(Date date,String pattern){
-		if(date==null || StringHelper.isBlank(pattern)){
+		if(date==null || StringUtils.isBlank(pattern)){
 			return "";
 		}
 		return DateFormatUtils.format(date, pattern);
@@ -80,7 +81,7 @@ public class DateHelper {
 	 * @return
 	 */
 	public static Date parse(String dateStr,String pattern){
-		if(StringHelper.isBlank(dateStr) || StringHelper.isBlank(pattern)){
+		if(StringUtils.isBlank(dateStr) || StringUtils.isBlank(pattern)){
 			return null;
 		}
 		SimpleDateFormat sdf = new SimpleDateFormat(pattern);
@@ -93,7 +94,7 @@ public class DateHelper {
 	 * @return
 	 */
 	public static Date parseDate(String dateStr){
-		if(StringHelper.isBlank(dateStr)){
+		if(StringUtils.isBlank(dateStr)){
 			return null;
 		}
 		SimpleDateFormat sdf = new SimpleDateFormat(DATE_PATTERN);
@@ -106,7 +107,7 @@ public class DateHelper {
 	 * @return
 	 */
 	public static Date parseDateTime(String dateStr){
-		if(StringHelper.isBlank(dateStr)){
+		if(StringUtils.isBlank(dateStr)){
 			return null;
 		}
 		SimpleDateFormat sdf = new SimpleDateFormat(DATETIME_PATTERN);

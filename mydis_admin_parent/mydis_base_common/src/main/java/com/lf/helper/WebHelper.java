@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -48,7 +49,7 @@ public class WebHelper {
 	 */
 	public static String getRequest(String name) {
 		String value = "";
-		if(StringHelper.isBlank(name)){
+		if(StringUtils.isBlank(name)){
 			return value;
 		}
 		HttpServletRequest request = getRequest();
@@ -68,7 +69,7 @@ public class WebHelper {
 	 */
 	public static <T> T getSession(String name) {
 		T value = null;
-		if(StringHelper.isBlank(name)){
+		if(StringUtils.isBlank(name)){
 			return value;
 		}
 		HttpServletRequest request = getRequest();
@@ -90,7 +91,7 @@ public class WebHelper {
 	 * @return
 	 */
 	public static Cookie getCookie(String name) {
-		if (StringHelper.isBlank(name)) {
+		if (StringUtils.isBlank(name)) {
 			return null;
 		}
 		HttpServletRequest request = getRequest();
@@ -116,7 +117,7 @@ public class WebHelper {
 	 * @return
 	 */
 	public static String getCookieValue(String name) {
-		if (StringHelper.isBlank(name)) {
+		if (StringUtils.isBlank(name)) {
 			return null;
 		}
         Cookie cookie = getCookie(name);
@@ -134,7 +135,7 @@ public class WebHelper {
 	 * @param maxAge 过期时间
 	 */
 	public static void setCookie(HttpServletResponse response, String name, String value, int maxAge) {
-		if (StringHelper.isBlank(name) || StringHelper.isBlank(value)) {
+		if (StringUtils.isBlank(name) || StringUtils.isBlank(value)) {
 			return;
 		}
 		Cookie cookie = new Cookie(name, value);
@@ -179,19 +180,19 @@ public class WebHelper {
 	public static String getRequestIp(HttpServletRequest request) {
         String ip = request.getHeader("X-Real-IP");
 
-        if (StringHelper.isBlank(ip) || "unknown".equalsIgnoreCase(ip)) {
+        if (StringUtils.isBlank(ip) || "unknown".equalsIgnoreCase(ip)) {
             ip = request.getHeader("Cdn-Src-Ip");
         }
-        if (StringHelper.isBlank(ip) || "unknown".equalsIgnoreCase(ip)) {
+        if (StringUtils.isBlank(ip) || "unknown".equalsIgnoreCase(ip)) {
             ip = request.getHeader("x-forwarded-for");
         }
-        if (StringHelper.isBlank(ip) || "unknown".equalsIgnoreCase(ip)) {
+        if (StringUtils.isBlank(ip) || "unknown".equalsIgnoreCase(ip)) {
             ip = request.getRemoteAddr();
         }
-        if (StringHelper.isBlank(ip) || "unknown".equalsIgnoreCase(ip)) {
+        if (StringUtils.isBlank(ip) || "unknown".equalsIgnoreCase(ip)) {
             ip = request.getHeader("Proxy-Client-IP");
         }
-        if (StringHelper.isBlank(ip) || "unknown".equalsIgnoreCase(ip)) {
+        if (StringUtils.isBlank(ip) || "unknown".equalsIgnoreCase(ip)) {
             ip = request.getHeader("WL-Proxy-Client-IP");
         }
         return ip.split(",")[0];

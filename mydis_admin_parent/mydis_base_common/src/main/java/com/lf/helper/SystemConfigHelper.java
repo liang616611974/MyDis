@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.io.StringReader;
 import java.util.Properties;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,7 +24,7 @@ public class SystemConfigHelper {
 	//propertie对象
 	private static Properties p = null;
 	
-	/**
+	/**r
 	 * 私有化
 	 */
 	private SystemConfigHelper(){};
@@ -38,7 +39,7 @@ public class SystemConfigHelper {
 		try{
 			sb = new StringBuilder();
 			//1.判断文件是否存在
-			if(StringHelper.isBlank(configPath)){
+			if(StringUtils.isBlank(configPath)){
 				return;
 			}
 			//2.如果存在，先过滤空格和“;”
@@ -49,7 +50,7 @@ public class SystemConfigHelper {
 			//3.遍历所有配置文件,并且合并
 			String[] configPaths = configPath.split(";");
 			for(String path : configPaths){
-				if(StringHelper.isBlank(path)){
+				if(StringUtils.isBlank(path)){
 					continue;
 				}
 				path = path.trim();
@@ -97,7 +98,7 @@ public class SystemConfigHelper {
 	 * @return
 	 */
 	public static String getStr(String key,String defaulVal){
-		if(StringHelper.isBlank(key)){
+		if(StringUtils.isBlank(key)){
 			if(defaulVal!=null){
 				return defaulVal;
 			}
@@ -129,7 +130,7 @@ public class SystemConfigHelper {
 	 */
 	public static int getInt(String key,int defaultVal) {
 		String val = getStr(key);
-		if(StringHelper.isBlank(val)) {
+		if(StringUtils.isBlank(val)) {
 			return defaultVal;
 		}
 		return Integer.parseInt(val);
@@ -151,7 +152,7 @@ public class SystemConfigHelper {
 	 * @return
 	 */
 	public static boolean getBoolean(String key,boolean defaultVal){
-		if(StringHelper.isBlank(getStr(key))) {
+		if(StringUtils.isBlank(getStr(key))) {
 			return defaultVal;
 		}
 		return Boolean.parseBoolean(key);
@@ -175,10 +176,10 @@ public class SystemConfigHelper {
 	public String getSystemStr(String key) {
 		String value = null;
 		value = System.getProperty(key);
-		if(StringHelper.isBlank(value)) {
+		if(StringUtils.isBlank(value)) {
 			value = System.getenv(key);
 		}
-		if(StringHelper.isBlank(value)){
+		if(StringUtils.isBlank(value)){
 			value = "";
 		}
 		return value;

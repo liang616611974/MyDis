@@ -7,11 +7,10 @@
         <artifactId>mydis_admin_parent</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
+
     <artifactId>mydis_base_common</artifactId>
 
-    <dependencies>
 
-    </dependencies>
 
 
 </project>

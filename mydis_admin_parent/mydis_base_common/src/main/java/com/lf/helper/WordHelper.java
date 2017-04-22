@@ -35,7 +35,7 @@ public class WordHelper {
 	 */
 	public static void createDocForTemplate(File templateDir,String templateName,Map<String,Object> paramMap,OutputStream os) throws Exception{
 		//1.创建一个合适的configuration对象
-		Configuration cfg = new Configuration(Configuration.VERSION_2_3_25);
+		Configuration cfg = new Configuration(Configuration.VERSION_2_3_23);
 		//2.设置模板所在目录
 		cfg.setDirectoryForTemplateLoading(templateDir);
 		cfg.setDefaultEncoding("UTF-8");

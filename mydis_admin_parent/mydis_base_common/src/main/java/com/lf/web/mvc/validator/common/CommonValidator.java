@@ -1,13 +1,13 @@
 package com.lf.web.mvc.validator.common;
 
 
-import javax.validation.ConstraintValidator;
-import javax.validation.ConstraintValidatorContext;
-
-import com.lf.helper.StringHelper;
 import com.lf.helper.ValidatorHelper;
 import com.lf.web.mvc.validator.common.annotation.CheckType;
 import com.lf.web.mvc.validator.common.annotation.Validator;
+import org.apache.commons.lang3.StringUtils;
+
+import javax.validation.ConstraintValidator;
+import javax.validation.ConstraintValidatorContext;
 
 
 @SuppressWarnings("all")
@@ -29,7 +29,7 @@ public class CommonValidator implements ConstraintValidator<Validator, String>{
 	@Override
 	public boolean isValid(String value, ConstraintValidatorContext arg1) {
 		//值为空则不校验
-		if(StringHelper.isBlank(value)){
+		if(StringUtils.isBlank(value)){
 			return true;
 		}
 		if(CheckType.EMAIL.value()==checkType.value()){

@@ -1,5 +1,7 @@
 package com.lf.helper;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.Properties;
 
 /**
@@ -39,7 +41,7 @@ public class PropertiesHelper {
 	 * @return
 	 */
 	public static String getStr(String key,String defaulVal){
-		if(StringHelper.isBlank(key)){
+		if(StringUtils.isBlank(key)){
 			if(defaulVal!=null){
 				return defaulVal;
 			}
@@ -70,7 +72,7 @@ public class PropertiesHelper {
 	 * @return
 	 */
 	public static int getInt(String key,int defaultVal) {
-		if(StringHelper.isBlank(getStr(key))) {
+		if(StringUtils.isBlank(getStr(key))) {
 			return defaultVal;
 		}
 		return Integer.parseInt(key);
@@ -92,7 +94,7 @@ public class PropertiesHelper {
 	 * @return
 	 */
 	public static boolean getBoolean(String key,boolean defaultVal){
-		if(StringHelper.isBlank(getStr(key))) {
+		if(StringUtils.isBlank(getStr(key))) {
 			return defaultVal;
 		}
 		return Boolean.parseBoolean(key);
@@ -116,10 +118,10 @@ public class PropertiesHelper {
 	public String getSystemStr(String key) {
 		String value = null;
 		value = System.getProperty(key);
-		if(StringHelper.isBlank(value)) {
+		if(StringUtils.isBlank(value)) {
 			value = System.getenv(key);
 		}
-		if(StringHelper.isBlank(value)){
+		if(StringUtils.isBlank(value)){
 			value = "";
 		}
 		return value;

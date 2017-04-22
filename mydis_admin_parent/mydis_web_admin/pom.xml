@@ -1,27 +1,19 @@
-<?xml version="1.0"?>
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <parent>
+        <artifactId>mydis_admin_parent</artifactId>
+        <groupId>com.lf.mydis</groupId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
 
-  <parent>
-    <groupId>com.lf.mydis</groupId>
-    <artifactId>mydis_admin_parent</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-  </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>mydis_web_admin</artifactId>
+    <packaging>war</packaging>
+    <name>mydis_web_admin Maven Webapp</name>
+    <url>http://maven.apache.org</url>
 
-  <groupId>com.lf.mydis</groupId>
-  <artifactId>mydis_web_admin</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <packaging>war</packaging>
-  <name>mydis_web_admin Maven Webapp</name>
-  <url>http://maven.apache.org</url>
-
-  <dependencies>
-
-  </dependencies>
-
-  <build>
-    <finalName>mydis_web_admin</finalName>
-  </build>
+    <build>
+        <finalName>mydis_web_admin</finalName>
+    </build>
 
 </project>
