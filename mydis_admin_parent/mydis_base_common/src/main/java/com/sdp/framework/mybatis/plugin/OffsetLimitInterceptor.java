@@ -49,8 +49,7 @@ public class OffsetLimitInterceptor implements Interceptor{
 	private final static int RESULT_HANDLER_INDEX = 3;
 	
 	private Dialect dialect;
-	
-	@Override
+
 	public Object intercept(Invocation invocation) throws Throwable {
 		processIntercept(invocation.getArgs());
 		return invocation.proceed();
@@ -121,12 +120,10 @@ public class OffsetLimitInterceptor implements Interceptor{
 		return builder.build();
 	}
 
-	@Override
 	public Object plugin(Object target) {
 		return Plugin.wrap(target, this);
 	}
 
-	@Override
 	public void setProperties(Properties properties) {
 		String dialectClass = properties.getProperty("dialectClass");
 		try {
@@ -142,7 +139,7 @@ public class OffsetLimitInterceptor implements Interceptor{
 		public BoundSqlSqlSource(BoundSql boundSql) {
 			this.boundSql = boundSql;
 		}
-		@Override
+
 		public BoundSql getBoundSql(Object parameterObject) {
 			return this.boundSql;
 		}

@@ -10,6 +10,22 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>mydis_module_service</artifactId>
-
+    <dependencies>
+        <dependency>
+            <groupId>com.lf.mydis</groupId>
+            <artifactId>mydis_base_common</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.lf.mydis</groupId>
+            <artifactId>mydis_module_bean</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.lf.mydis</groupId>
+            <artifactId>mydis_module_dao</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 
 </project>

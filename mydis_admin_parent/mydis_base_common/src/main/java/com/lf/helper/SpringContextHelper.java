@@ -25,7 +25,6 @@ public class SpringContextHelper implements ApplicationContextAware{
 	/**
      * 设置当前上下文环境，此方法由spring自动装配
      */
-	@Override
 	public void setApplicationContext(ApplicationContext context) throws BeansException {
 		applicationContext = context;
 	}

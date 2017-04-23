@@ -17,13 +17,11 @@ public class ResourceInitListener implements ServletContextListener{
 	/**
 	 * 监听器销毁
 	 */
-	@Override
 	public void contextDestroyed(ServletContextEvent event) {}
 
 	/**
 	 * 监听器初始化
 	 */
-	@Override
 	public void contextInitialized(ServletContextEvent event) {
 		// 1.加载系统配置文件
 		String systemConfigPath = event.getServletContext().getInitParameter("systemConfigPath"); 

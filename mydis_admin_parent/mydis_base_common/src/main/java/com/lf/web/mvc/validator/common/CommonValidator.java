@@ -16,8 +16,7 @@ public class CommonValidator implements ConstraintValidator<Validator, String>{
 	private String value;
 	private CheckType checkType;
 	private String message;
-	
-	@Override
+
 	public void initialize(Validator validator) {
 		//把注解validator的属性值传递
 		this.value = validator.value();
@@ -26,7 +25,6 @@ public class CommonValidator implements ConstraintValidator<Validator, String>{
 		
 	}
 
-	@Override
 	public boolean isValid(String value, ConstraintValidatorContext arg1) {
 		//值为空则不校验
 		if(StringUtils.isBlank(value)){

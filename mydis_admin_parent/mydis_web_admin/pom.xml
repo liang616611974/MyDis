@@ -12,6 +12,29 @@
     <name>mydis_web_admin Maven Webapp</name>
     <url>http://maven.apache.org</url>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.lf.mydis</groupId>
+            <artifactId>mydis_base_common</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.lf.mydis</groupId>
+            <artifactId>mydis_module_bean</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.lf.mydis</groupId>
+            <artifactId>mydis_module_dao</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.lf.mydis</groupId>
+            <artifactId>mydis_module_service</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+
     <build>
         <finalName>mydis_web_admin</finalName>
     </build>

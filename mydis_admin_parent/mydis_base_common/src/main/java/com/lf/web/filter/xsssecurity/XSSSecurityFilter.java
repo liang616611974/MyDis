@@ -28,7 +28,6 @@ public class XSSSecurityFilter implements Filter{
 	/**
 	 * 初始化
 	 */
-	@Override
 	public void init(FilterConfig config) throws ServletException {
 		//1.初始化XSSSecurityManager管理器
         String xssConfigPath = config.getServletContext().getRealPath("/")
@@ -44,7 +43,6 @@ public class XSSSecurityFilter implements Filter{
 	/**
 	 * 拦截处理
 	 */
-	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		// 1.判断是否使用HTTP
 		checkRequestResponse(request, response);
@@ -76,7 +74,6 @@ public class XSSSecurityFilter implements Filter{
 	/**
 	 * 销毁
 	 */
-	@Override
 	public void destroy() {
 		// XSSSecurityManager管理器注销
 		XSSSecurityManager.destroy();

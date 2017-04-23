@@ -90,7 +90,7 @@ public class JsonHelper {
 	 * json Array字符串转换成集合
 	 * @param json json Array字符串
 	 * @param collectionClass 集合类型，例如：ArrayList.class
-	 * @param elementClasses 集合中的对象类型，例如 Obj.class
+	 * @param elementClasses 集合中的元素类型，例如 Obj.class
 	 * @return  例如：List<Obj>
 	 * @throws Exception
 	 */
